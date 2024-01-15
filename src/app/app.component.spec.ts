@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'employee-portal'`, () => {
+  it(`should have as title 'employ-portal'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('employee-portal');
+    expect(app.title).toEqual('employ-portal');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('employee-portal app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('employ-portal app is running!');
   });
 });
