@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminapiService } from '../services/adminapi.service';
 import { employee } from '../employee.model';
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 @Component({
   selector: 'app-list',
@@ -10,6 +12,7 @@ import { employee } from '../employee.model';
 export class ListComponent implements OnInit {
 
   allEmployeeget:employee[]=[]
+  searchkey:string=""
 
  constructor(private api:AdminapiService){}
 
@@ -32,6 +35,47 @@ allEmployee(){
       
     }
   })
+}
+
+removeemployee(id:any){
+  this.api.deleteEmployeeApi(id).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      this.allEmployee()
+      
+    },
+    error:(err:any)=>{
+      console.log(err);
+      
+    }
+  })
+}
+
+sortid(){
+  this.allEmployeeget.sort((a:any,b:any)=>a.id-b.id)
+
+}
+
+sortname(){
+  this.allEmployeeget.sort((a:any,b:any)=>a.name.localeCompare(b.name))
+}
+
+generatepdf(){
+  const pdf=new jsPDF()
+
+  let head=[['Id','Employee name','Email','Status']]
+
+  let body:any=[]
+  this.allEmployeeget.forEach((item)=>{
+    body.push([item.id,item.name,item.email,item.status])
+  })
+
+  pdf.setFontSize(16)
+
+  pdf.text('Employee Details',10,10)
+  autoTable(pdf,{head,body})
+
+  pdf.save('employee.pdf')
 }
 
 

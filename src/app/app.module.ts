@@ -11,7 +11,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { AddComponent } from './add/add.component';
 import { ListComponent } from './list/list.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { SearchPipe } from './search.pipe'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {HttpClientModule} from '@angular/common/http'
     UsersComponent,
     EditUserComponent,
     AddComponent,
-    ListComponent
+    ListComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

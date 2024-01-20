@@ -9,7 +9,7 @@ export class AdminapiService {
 
   constructor(private http:HttpClient) { }
 
-  server_URL = 'http://localhost:9000'
+  server_URL = 'http://localhost:5000'
 
   authorization(){
   return  this.http.get(`${this.server_URL}/employee/1`)
@@ -24,4 +24,24 @@ export class AdminapiService {
 getAllEmployeeApi(){
   return this.http.get(`${this.server_URL}/employee`)
 }
+
+deleteEmployeeApi(id:string){
+  return this.http.delete(`${this.server_URL}/employee/${id}`)
+}
+
+viewEmployeeApi(id:string){
+  return this.http.get(`${this.server_URL}/employee/${id}`)
+}
+
+// to update
+updateemployeeApi(id:any,employee:any){
+  return this.http.put(`${this.server_URL}/employee/${id}`,
+employee)
+}
+
+
+
+
+
+
 }

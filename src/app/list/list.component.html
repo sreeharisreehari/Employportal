@@ -19,16 +19,15 @@
     
         <div class="d-flex align-items-center">
     
-          <input class="form-control" type="text" value="Search" placeholder="search" style="width: 300px; height: 35px;">
+          <input class="form-control" type="text" value="Search" placeholder="search" style="width: 300px; height: 35px;"  [(ngModel)]="searchkey">
     
           <div class="dropdown ms-3">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Sort
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" (click)="sortid()">by id</a></li>
+              <li><a class="dropdown-item" (click)="sortname()">By name</a></li>
             </ul>
           </div>
     
@@ -50,14 +49,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let employee of allEmployeeget" [hidden]="employee.id=='1'">
+          <tr *ngFor="let employee of allEmployeeget | search:searchkey" [hidden]="employee.id=='1'">
             <th scope="row">{{employee.id}}</th>
             <td>{{employee.name}}</td>
             <td>{{employee.email}}</td>
             <td>{{employee.status=='1'?'Active':'InActive'}}</td>
             <td>
-              <button type="button" class="btn"><a routerLink="/employee/edit/:id"  ><i class="fa-solid fa-pen" style="color: #00ff1e;"></i></a></button>
-              <button type="button" class="btn"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></button>
+              <button type="button" class="btn"><a routerLink="/employee/edit/{{employee.id}}"  ><i class="fa-solid fa-pen" style="color: #00ff1e;"></i></a></button>
+              <button (click)="removeemployee(employee.id)" type="button" class="btn"><i class="fa-solid fa-trash" style="color: #ff0000;"></i></button>
             </td>
           </tr>
         </tbody>
